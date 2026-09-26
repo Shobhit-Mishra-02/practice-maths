@@ -1,0 +1,1 @@
+export const getRandomNumber = (n: number) => Math.floor(Math.random() * n);
