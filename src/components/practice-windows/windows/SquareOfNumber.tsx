@@ -1,68 +1,131 @@
 import { useState } from "react";
 import { AnswerStates } from "../../../constants";
-import type { ConfigInterface } from "../../../types";
-import { getRandomNumber } from "../../../utils";
-import { Button, InputBox } from "../../common";
-import EditConfiguration from "../../practice-configs/EditConfiguration";
-import HeadingWrapper from "./HeadingWrapper";
+import { useConfigStore, useMenuStore } from "../../../store";
+import { randomNumberWithLimits } from "../../../utils";
+import {
+  Button,
+  HeaderWithBackBtnWrapper,
+  InputBox,
+  Table,
+} from "../../common";
 import Result from "./Result";
 
-const configs: ConfigInterface[] = [
-  {
-    id: "number_of_ques",
-    name: "numberOfQues",
-    type: "number",
-    label: "Number of questions",
-    defaultValue: "10",
-  },
-  {
-    id: "from_limit",
-    name: "fromLimit",
-    type: "number",
-    label: "Numbers starting from",
-    hint: "Used to configure the starting range of numers, like starting from 10, 100, etc..",
-    defaultValue: 10,
-  },
-  {
-    id: "to_limit",
-    name: "toLimit",
-    type: "number",
-    label: "Numbers ending to",
-    hint: "Used to configure the ending range of numers",
-    defaultValue: 100,
-  },
-];
-
 const SquareOfNumber = () => {
-  const [num] = useState<number>(getRandomNumber(100));
+  const config = useConfigStore((state) => state.config);
+  const {
+    numberOfQues = 0,
+    fromLimit,
+    toLimit,
+  } = config as { numberOfQues: string; fromLimit: string; toLimit: string };
+
+  const onBack = useMenuStore((state) => state.reset);
+  const getNumber = () =>
+    randomNumberWithLimits(parseInt(fromLimit), parseInt(toLimit));
+  const [num, setNum] = useState<number>(getNumber());
   const [ans, setAns] = useState<number>(0);
   const [ansState, setAnsState] = useState(AnswerStates.PENDING);
 
+  const [result, setResult] = useState(
+    [] as {
+      id: number;
+      question: string;
+      answer: number;
+      expected: number;
+    }[],
+  );
+  const [wrongAttempts, setWrongAttemps] = useState(0);
+  const [rightAttemps, setRightAttemps] = useState(0);
+
+  const [tracker, setTracker] = useState(0);
+
+  const refreshQuestion = () => {
+    setNum(() => getNumber());
+    setAns(() => 0);
+    setAnsState(AnswerStates.PENDING);
+  };
+
+  const next = () => {
+    if (tracker < +numberOfQues) {
+      setTracker((prev) => prev + 1);
+      refreshQuestion();
+    }
+  };
+
   const handleSubmit = () => {
     if (ans === num * num) {
+      setResult((res) => [
+        ...res,
+        {
+          id: Date.now(),
+          question: `${num} X ${num} = ?`,
+          answer: ans,
+          expected: num * num,
+        },
+      ]);
       setAnsState(AnswerStates.CORRECT);
+      setRightAttemps((prev) => prev + 1);
+      next();
     } else {
+      setWrongAttemps((prev) => prev + 1);
       setAnsState(AnswerStates.WRONG);
     }
   };
 
-  return (
-    <HeadingWrapper heading="Finding Square of two digits">
-      <EditConfiguration configs={configs}>
-        <div className="flex flex-col gap-2 max-w-[300px] m-auto">
-          <span className="text-xl mt-2 mb-1">{`${num} X ${num} = ?`}</span>
-          <InputBox
-            type="number"
-            value={ans}
-            onChange={(
-              e: React.ChangeEvent<HTMLInputElement, HTMLInputElement>,
-            ) => setAns(parseInt(e.target.value))}
-          />
-          <Button onClick={handleSubmit} label="Submit" />
-          <Result answerState={ansState} />
+  if (tracker === +numberOfQues) {
+    const headings = [
+      {
+        label: "Question",
+        key: "question",
+      },
+      {
+        label: "Answer",
+        key: "answer",
+      },
+      {
+        label: "Expected Answer",
+        key: "expected",
+      },
+    ];
+    return (
+      <HeaderWithBackBtnWrapper
+        backLabel="Home"
+        heading="Finding Square of two digits"
+        onBack={onBack}
+      >
+        <div className="m-auto w-fit">
+          <div className="flex flex-col gap-1 text-left mb-2 text-gray-800">
+            <span>Total number of questions attempted: {numberOfQues}</span>
+            <span>Total number of correct attempts: {rightAttemps}</span>
+            <span>Total number of wrong attempts: {wrongAttempts}</span>
+          </div>
+          <Table headings={headings} enableSerialNo={true} tableData={result} />
         </div>
-      </EditConfiguration>
-    </HeadingWrapper>
+      </HeaderWithBackBtnWrapper>
+    );
+  }
+
+  return (
+    <HeaderWithBackBtnWrapper
+      backLabel="Home"
+      onBack={onBack}
+      heading="Finding Square of two digits"
+    >
+      <div className="flex flex-col gap-2 max-w-[300px] m-auto">
+        <div className="flex flex-row justify-end">
+          <span>{`Progress ${tracker + 1}/${numberOfQues}`}</span>
+        </div>
+        <span className="text-xl mt-2 mb-1">{`${num} X ${num} = ?`}</span>
+        <InputBox
+          type="number"
+          value={ans}
+          onChange={(
+            e: React.ChangeEvent<HTMLInputElement, HTMLInputElement>,
+          ) => setAns(parseInt(e.target.value))}
+        />
+        <Button onClick={handleSubmit} label="Submit" />
+        <Result answerState={ansState} />
+      </div>
+    </HeaderWithBackBtnWrapper>
   );
 };
 

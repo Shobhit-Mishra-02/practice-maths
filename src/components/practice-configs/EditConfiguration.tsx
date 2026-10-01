@@ -1,10 +1,13 @@
 import { isEmpty } from "lodash";
-import type { ConfigInterface } from "../../types";
-import InputFactory from "./InputFactory";
-import { createConfigFormSubmitPayload as createFinalResult } from "../../utils";
 import React, { useState } from "react";
-import { useConfigStore } from "../../store";
-import { Button } from "../common";
+import { useConfigStore, useMenuStore } from "../../store";
+import type { ConfigInterface } from "../../types";
+import { createConfigFormSubmitPayload as createFinalResult } from "../../utils";
+import {
+  Button,
+  HeaderWithBackBtnWrapper
+} from "../common";
+import InputFactory from "./InputFactory";
 
 const EditConfiguration = ({
   configs,
@@ -15,6 +18,7 @@ const EditConfiguration = ({
 }) => {
   const [validatedConfig, setConfigValidation] = useState(false);
   const setConfig = useConfigStore((state) => state.setConfigs);
+  const onBack = useMenuStore((state) => state.reset);
 
   if (isEmpty(configs)) return null;
 
@@ -36,17 +40,23 @@ const EditConfiguration = ({
   };
 
   return (
-    <form
-      className="flex flex-col gap-1 mt-4 max-w-[300px] m-auto"
-      onSubmit={handleSubmit}
+    <HeaderWithBackBtnWrapper
+      heading="Practice configuration"
+      onBack={() => onBack()}
+      backLabel="Home"
     >
-      {configs.map((cnf) => (
-        <InputFactory key={cnf.id} {...cnf} />
-      ))}
-      <div className="mt-4">
-        <Button label="Configure" {...extraParams} />
-      </div>
-    </form>
+      <form
+        className="flex flex-col gap-1 mt-4 max-w-[300px] m-auto"
+        onSubmit={handleSubmit}
+      >
+        {configs.map((cnf) => (
+          <InputFactory key={cnf.id} {...cnf} />
+        ))}
+        <div className="mt-4">
+          <Button label="Configure" {...extraParams} />
+        </div>
+      </form>
+    </HeaderWithBackBtnWrapper>
   );
 };
 

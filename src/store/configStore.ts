@@ -13,13 +13,20 @@ export const useConfigStore = create<State & Action>()((set) => ({
   config: {},
   setConfig: (key: string, value: string | number) =>
     set((state) => ({
-      ...state.config,
-      [key]: value,
+      config: {
+        ...state.config,
+        [key]: value,
+      },
     })),
   setConfigs: (cnfs: { key: string; value: string | number }[]) =>
     set((state) => ({
-      ...state.config,
-      ...cnfs.reduce((acc, curr) => ({ ...acc, ...curr }), {}),
+      config: {
+        ...state.config,
+        ...cnfs.reduce(
+          (acc, curr) => ({ ...acc, ...{ [curr.key]: curr.value } }),
+          {},
+        ),
+      },
     })),
   reset: () => set(() => ({})),
 }));
