@@ -1,4 +1,3 @@
-import SquareOfThreeDigits from "./SquareOfThreeDigits";
-import SquareOfTwoDigits from "./SquareOfTwoDigits";
+import SquareOfNumber from "./SquareOfNumber";
 
-export { SquareOfThreeDigits, SquareOfTwoDigits };
+export { SquareOfNumber };

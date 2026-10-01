@@ -1,15 +1,13 @@
-import { SquareOfThreeDigits, SquareOfTwoDigits } from "./windows";
+import { SquareOfNumber } from "./windows";
 import { MENU_OPTION_TYPES } from "../../constants";
 
 const PracticeFactory = ({ optionId }: { optionId: string }) => {
   switch (optionId) {
-    case MENU_OPTION_TYPES.SQUARE_OF_TWO_DIGITS:
-      return <SquareOfTwoDigits />;
-
-    case MENU_OPTION_TYPES.SQUARE_OF_THREE_DIGITS:
-      return <SquareOfThreeDigits />;
+    case MENU_OPTION_TYPES.SQUARE_OF_NUMBER:
+      return <SquareOfNumber />;
 
     default:
+      return <div>No window found !!</div>;
       break;
   }
 };

@@ -1,5 +1,6 @@
 import type React from "react";
 import { useMenuStore } from "../../../store";
+import { Heading, Button } from "../../common";
 
 const HeadingWrapper = ({
   heading,
@@ -12,9 +13,9 @@ const HeadingWrapper = ({
   return (
     <div>
       <div>
-        <button onClick={() => onBack()}>back</button>
+        <Button onClick={() => onBack()} label="Back" varient="tirnary" />
       </div>
-      <h4>{heading}</h4>
+      <Heading>{heading}</Heading>
       <div>{children}</div>
     </div>
   );

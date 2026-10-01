@@ -12,7 +12,8 @@ const MenuContainer = ({
 }) => {
   return (
     <div>
-      <h4>{heading}</h4>
+      <h4 className="font-bold text-center mt-2 text-gray-700">{heading}</h4>
+      <div className="flex flex-col gap-2 justify-center items-center mt-2">
       {options.map((option) => (
         <Option
           key={option.id}
@@ -20,6 +21,7 @@ const MenuContainer = ({
           onClick={() => handleOptionSelect(option.id)}
         />
       ))}
+      </div>
     </div>
   );
 };

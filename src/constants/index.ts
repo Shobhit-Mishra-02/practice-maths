@@ -1,6 +1,7 @@
+import type { AnswerStateType } from "../types";
+
 export const MENU_OPTION_TYPES = {
-    SQUARE_OF_TWO_DIGITS: 'SQUARE_OF_TWO_DIGITS',
-    SQUARE_OF_THREE_DIGITS: 'SQUARE_OF_THREE_DIGITS'
+    SQUARE_OF_NUMBER: 'SQUARE_OF_NUMBER',
 }
 
 export const MENU_OPTIONS: {
@@ -9,11 +10,13 @@ export const MENU_OPTIONS: {
   description?: string;
 }[] = [
   {
-    id: MENU_OPTION_TYPES.SQUARE_OF_TWO_DIGITS,
-    name: "Finding Square of two digit numbers",
+    id: MENU_OPTION_TYPES.SQUARE_OF_NUMBER,
+    name: "Finding Square of number",
   },
-  {
-    id: MENU_OPTION_TYPES.SQUARE_OF_THREE_DIGITS,
-    name: "Finding Square of three digit numbers"
-  }
 ];
+
+export const AnswerStates: Record<string, AnswerStateType> = {
+  CORRECT: "CORRECT",
+  WRONG: "WRONG",
+  PENDING: "PENDING",
+}

@@ -1,3 +1,5 @@
+import { Button } from "../common";
+
 const Option = ({
   name,
   onClick,
@@ -6,7 +8,9 @@ const Option = ({
   name: string;
   onClick: () => void;
 }) => {
-  return <button onClick={onClick} {...rest}>{name}</button>;
+  return (
+    <Button label={name} onClick={onClick} {...rest} />
+  );
 };
 
 export default Option;
