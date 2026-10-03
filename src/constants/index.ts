@@ -15,8 +15,26 @@ export const MENU_OPTIONS: {
   },
 ];
 
-export const AnswerStates: Record<string, AnswerStateType> = {
+export const ANSWER_STATES: Record<string, AnswerStateType> = {
   CORRECT: "CORRECT",
   WRONG: "WRONG",
   PENDING: "PENDING",
 }
+
+export const RESULT_TABLE_HEADER = [
+  {
+    id: "ques",
+    label: "Question",
+    key: "question",
+  },
+  {
+    id: "ans",
+    label: "Answer",
+    key: "answer",
+  },
+  {
+    id: "expt",
+    label: "Expected Answer",
+    key: "expected",
+  },
+];

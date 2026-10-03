@@ -1,5 +1,5 @@
 import { isEmpty } from "lodash";
-import type { AnswerStateType } from "../../../types";
+import type { AnswerStateType } from "../../types";
 
 const Result = ({
   answerState,

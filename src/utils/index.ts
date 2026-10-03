@@ -35,3 +35,20 @@ export const waitFor = (time: number) => {
     setTimeout(() => resolve(true), time);
   });
 };
+
+export const getResultRowForSqrtOfNo = ({
+  question,
+  answer,
+  expected,
+}: {
+  question: string;
+  answer: string | number;
+  expected: string | number;
+}) => {
+  return {
+    id: Date.now(),
+    question,
+    answer,
+    expected,
+  };
+};

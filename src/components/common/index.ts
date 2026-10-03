@@ -4,6 +4,9 @@ import BackgroundContainer from "./BackgroundContainer";
 import InputBox from "./InputBox";
 import HeaderWithBackBtnWrapper from "./HeaderWithBackBtnWrapper";
 import Table from "./Table";
+import FinalResultWindow from "./FinalResultWindow";
+import Tracker from "./Tracker";
+import Result from "./Result";
 
 export {
   Button,
@@ -11,5 +14,8 @@ export {
   BackgroundContainer,
   InputBox,
   HeaderWithBackBtnWrapper,
-  Table
+  Table,
+  FinalResultWindow,
+  Tracker,
+  Result,
 };
