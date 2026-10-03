@@ -1,28 +1,32 @@
-import { useEffect, useState } from "react";
-import { ANSWER_STATES, RESULT_TABLE_HEADER } from "../../../constants";
+import { useState, useEffect } from "react";
 import { useConfigStore, useMenuStore, useResultStore } from "../../../store";
 import {
-  randomNumberWithLimits,
+  randomNumberWithLimits as getNum,
   getResultRow as getRow,
 } from "../../../utils";
-import {
-  FinalResultWindow,
-  HeaderWithBackBtnWrapper,
-  Tracker,
-} from "../../common";
+import { ANSWER_STATES, RESULT_TABLE_HEADER } from "../../../constants";
+import { HeaderWithBackBtnWrapper, Tracker, FinalResultWindow } from "../../common";
 
-const SquareOfNumber = () => {
+const MultiplicationOfNumbers = () => {
   const config = useConfigStore((state) => state.config);
   const {
-    numberOfQues = 0,
-    fromLimit,
-    toLimit,
-  } = config as { numberOfQues: string; fromLimit: string; toLimit: string };
-
+    numberOfQues,
+    fromLimitOfFirstNum: fromNum1,
+    toLimitOfFirstNum: toNum1,
+    fromLimitOfSecondNum: fromNum2,
+    toLimitOfSecondNum: toNum2,
+  } = config as {
+    numberOfQues: string;
+    fromLimitOfFirstNum: string;
+    toLimitOfFirstNum: string;
+    fromLimitOfSecondNum: string;
+    toLimitOfSecondNum: string;
+  };
   const onBack = useMenuStore((state) => state.reset);
-  const getNumber = () =>
-    randomNumberWithLimits(parseInt(fromLimit), parseInt(toLimit));
-  const [num, setNum] = useState<number>(getNumber());
+  const [nums, setNums] = useState({
+    num1: getNum(+fromNum1, +toNum1),
+    num2: getNum(+fromNum2, +toNum2),
+  });
   const [ans, setAns] = useState<number>(0);
   const [ansState, setAnsState] = useState(ANSWER_STATES.PENDING);
 
@@ -38,18 +42,21 @@ const SquareOfNumber = () => {
   }, []);
 
   const refreshQuestion = () => {
-    setNum(() => getNumber());
+    setNums(() => ({
+      num1: getNum(+fromNum1, +toNum1),
+      num2: getNum(+fromNum2, +toNum2),
+    }));
     setAns(() => 0);
     setAnsState(ANSWER_STATES.PENDING);
   };
 
   const handleSubmit = (next: (cb?: () => void) => void) => {
-    if (ans === num * num) {
+    if (ans === nums.num1 * nums.num2) {
       addResult(
         getRow({
-          question: `${num} X ${num} = ?`,
+          question: `${nums.num1} X ${nums.num2} = ?`,
           answer: ans,
-          expected: num * num,
+          expected: nums.num1 * nums.num2,
         }),
       );
       setAnsState(ANSWER_STATES.CORRECT);
@@ -68,7 +75,7 @@ const SquareOfNumber = () => {
       heading="Finding Square of two digits"
     >
       <Tracker
-        questionText={`${num} X ${num} = ?`}
+        questionText={`${nums.num1} X ${nums.num2} = ?`}
         ans={ans}
         setAns={setAns as (val: string | number) => void}
         ansState={ansState}
@@ -80,4 +87,4 @@ const SquareOfNumber = () => {
   );
 };
 
-export default SquareOfNumber;
+export default MultiplicationOfNumbers;

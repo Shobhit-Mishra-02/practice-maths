@@ -36,7 +36,7 @@ export const waitFor = (time: number) => {
   });
 };
 
-export const getResultRowForSqrtOfNo = ({
+export const getResultRow = ({
   question,
   answer,
   expected,

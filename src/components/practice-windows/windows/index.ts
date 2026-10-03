@@ -1,3 +1,5 @@
 import SquareOfNumber from "./SquareOfNumber";
+import MultiplicationOfNumbers from "./MultiplicationOfNumbers";
+import AdditionOfNumbers from "./AdditionOfNumbers";
 
-export { SquareOfNumber };
+export { SquareOfNumber, MultiplicationOfNumbers, AdditionOfNumbers };
