@@ -8,9 +8,7 @@ const Option = ({
   name: string;
   onClick: () => void;
 }) => {
-  return (
-    <Button label={name} onClick={onClick} {...rest} />
-  );
+  return <Button label={name} onClick={onClick} {...rest} />;
 };
 
 export default Option;
