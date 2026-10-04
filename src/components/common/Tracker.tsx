@@ -1,8 +1,10 @@
 import InputBox from "./InputBox";
 import Button from "./Button";
 import Result from "./Result";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { AnswerStateType } from "../../types";
+import StopWatch from "./StopWatch";
+import { useStopWatch } from "../../store";
 
 const Tracker = ({
   questionText,
@@ -22,6 +24,12 @@ const Tracker = ({
   finalSummaryComp: React.ReactNode;
 }) => {
   const [tracker, setTracker] = useState(0);
+  const { stop, restart } = useStopWatch((state) => state);
+
+  useEffect(() => {
+    if (tracker == 0) restart();
+    else if (tracker === numberOfQues) stop();
+  }, [tracker]);
 
   const next = (cb?: () => void) => {
     setTracker((prev) => prev + 1);
@@ -34,7 +42,8 @@ const Tracker = ({
 
   return (
     <div className="flex flex-col gap-2 max-w-[300px] m-auto">
-      <div className="flex flex-row justify-end">
+      <div className="flex flex-row justify-between">
+        <StopWatch />
         <span>{`Progress ${tracker + 1}/${numberOfQues}`}</span>
       </div>
       <span className="text-xl mt-2 mb-1">{questionText}</span>

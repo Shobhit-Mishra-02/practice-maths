@@ -7,6 +7,7 @@ import Table from "./Table";
 import FinalResultWindow from "./FinalResultWindow";
 import Tracker from "./Tracker";
 import Result from "./Result";
+import StopWatch from "./StopWatch";
 
 export {
   Button,
@@ -18,4 +19,5 @@ export {
   FinalResultWindow,
   Tracker,
   Result,
+  StopWatch,
 };

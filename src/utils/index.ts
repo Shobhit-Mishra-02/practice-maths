@@ -52,3 +52,16 @@ export const getResultRow = ({
     expected,
   };
 };
+
+export const getFormattedTime = (time: number) => {
+  const SEC_IN_MIN = 60;
+  const SEC_IN_HOUR = 60 * SEC_IN_MIN;
+
+  const hr = Math.floor(time / SEC_IN_HOUR).toString();
+  const min = Math.floor((time % SEC_IN_HOUR) / SEC_IN_MIN).toString();
+  const sec = ((time % SEC_IN_HOUR) % SEC_IN_MIN).toString();
+
+  return `${hr.length === 1 ? "0" + hr : hr}:${
+    min.length === 1 ? "0" + min : min
+  }:${sec.length === 1 ? "0" + sec : sec}`;
+};

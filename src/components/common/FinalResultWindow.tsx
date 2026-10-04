@@ -1,5 +1,6 @@
+import { useConfigStore, useResultStore, useStopWatch } from "../../store";
 import Table from "./Table";
-import { useResultStore, useConfigStore } from "../../store";
+import { getFormattedTime } from "../../utils";
 
 const FinalResultWindow = () => {
   const config = useConfigStore((state) => state.config);
@@ -8,10 +9,14 @@ const FinalResultWindow = () => {
   const wrongCount = useResultStore((state) => state.wrongAttemptCount);
   const headings = useResultStore((state) => state.resultTable.headers);
   const rows = useResultStore((state) => state.resultTable.rows);
-  
+  const { time: totalTimeTaken } = useStopWatch(
+    (state) => state,
+  );
+
   return (
     <div className="m-auto w-fit">
       <div className="flex flex-col gap-1 text-left mb-2 text-gray-800">
+        <span>Total time taken: {getFormattedTime(totalTimeTaken)}</span>
         <span>Total number of questions attempted: {numberOfQues}</span>
         <span>Total number of correct attempts: {rightCount}</span>
         <span>Total number of wrong attempts: {wrongCount}</span>
