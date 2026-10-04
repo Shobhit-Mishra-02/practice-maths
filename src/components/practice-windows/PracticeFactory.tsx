@@ -2,12 +2,16 @@ import {
   SquareOfNumber,
   MultiplicationOfNumbers,
   AdditionOfNumbers,
+  SubtractionOfNumbers,
+  DivisionOfNumbers,
 } from "./windows";
 import {
   MENU_OPTION_TYPES,
   SQUARE_OF_NUMBER_CONFIG,
   MULTIPLICATION_OF_NUMBERS_CONFIG,
   ADDITION_OF_NUMBERS_CONFIG,
+  SUBTRACTION_OF_NUMBERS_CONFIG,
+  DIVISION_OF_NUMBERS_CONFIG,
 } from "../../constants";
 import EditConfiguration from "../practice-configs/EditConfiguration";
 
@@ -34,9 +38,22 @@ const PracticeFactory = ({ optionId }: { optionId: string }) => {
         </EditConfiguration>
       );
 
+    case MENU_OPTION_TYPES.SUBTRACTION_OF_NUMBERS:
+      return (
+        <EditConfiguration configs={SUBTRACTION_OF_NUMBERS_CONFIG}>
+          <SubtractionOfNumbers />
+        </EditConfiguration>
+      );
+
+    case MENU_OPTION_TYPES.DIVISION_OF_NUMBERS:
+      return (
+        <EditConfiguration configs={DIVISION_OF_NUMBERS_CONFIG}>
+          <DivisionOfNumbers />
+        </EditConfiguration>
+      );
+
     default:
       return <div>No window found !!</div>;
-      break;
   }
 };
 

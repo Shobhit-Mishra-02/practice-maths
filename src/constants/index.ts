@@ -5,6 +5,8 @@ export const MENU_OPTION_TYPES = {
   SQUARE_OF_NUMBER: "SQUARE_OF_NUMBER",
   MULTIPLICATION_OF_NUMBERS: "MULTIPLICATION_OF_NUMBERS",
   ADDITION_OF_NUMBERS: "ADDITION_OF_NUMBERS",
+  SUBTRACTION_OF_NUMBERS: "SUBTRACTION_OF_NUMBERS",
+  DIVISION_OF_NUMBERS: "DIVISION_OF_NUMBERS",
 };
 
 export const MENU_OPTIONS: {
@@ -19,6 +21,14 @@ export const MENU_OPTIONS: {
   {
     id: MENU_OPTION_TYPES.ADDITION_OF_NUMBERS,
     name: "Finding Addition of numbers",
+  },
+  {
+    id: MENU_OPTION_TYPES.SUBTRACTION_OF_NUMBERS,
+    name: "Finding Subtraction of numbers",
+  },
+  {
+    id: MENU_OPTION_TYPES.DIVISION_OF_NUMBERS,
+    name: "Finding Division of numbers",
   },
   {
     id: MENU_OPTION_TYPES.SQUARE_OF_NUMBER,

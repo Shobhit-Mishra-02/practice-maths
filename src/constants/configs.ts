@@ -109,3 +109,87 @@ export const ADDITION_OF_NUMBERS_CONFIG: ConfigInterface[] = [
     defaultValue: 100,
   },
 ];
+
+export const SUBTRACTION_OF_NUMBERS_CONFIG: ConfigInterface[] = [
+  {
+    id: "number_of_ques",
+    name: "numberOfQues",
+    type: "number",
+    label: "Number of questions",
+    defaultValue: "10",
+  },
+  {
+    id: "from_limit_of_first_num",
+    name: "fromLimitOfFirstNum",
+    type: "number",
+    label: "Starting limit of first number",
+    hint: "Used to configure the starting range of numbers",
+    defaultValue: 10,
+  },
+  {
+    id: "to_limit_of_first_num",
+    name: "toLimitOfFirstNum",
+    type: "number",
+    label: "Ending limit of first number",
+    hint: "Used to configure the ending range of numbers",
+    defaultValue: 100,
+  },
+  {
+    id: "from_limit_of_second_num",
+    name: "fromLimitOfSecondNum",
+    type: "number",
+    label: "Starting limit of second number",
+    hint: "Used to configure the starting range of numbers",
+    defaultValue: 10,
+  },
+  {
+    id: "to_limit_of_second_num",
+    name: "toLimitOfSecondNum",
+    type: "number",
+    label: "Ending limit of second number",
+    hint: "Used to configure the ending range of numbers",
+    defaultValue: 100,
+  },
+];
+
+export const DIVISION_OF_NUMBERS_CONFIG: ConfigInterface[] = [
+  {
+    id: "number_of_ques",
+    name: "numberOfQues",
+    type: "number",
+    label: "Number of questions",
+    defaultValue: "10",
+  },
+  {
+    id: "from_limit_of_first_num",
+    name: "fromLimitOfFirstNum",
+    type: "number",
+    label: "Starting limit of first number",
+    hint: "Used to configure the starting range of numbers",
+    defaultValue: 10,
+  },
+  {
+    id: "to_limit_of_first_num",
+    name: "toLimitOfFirstNum",
+    type: "number",
+    label: "Ending limit of first number",
+    hint: "Used to configure the ending range of numbers",
+    defaultValue: 100,
+  },
+  {
+    id: "from_limit_of_second_num",
+    name: "fromLimitOfSecondNum",
+    type: "number",
+    label: "Starting limit of second number",
+    hint: "Used to configure the starting range of numbers",
+    defaultValue: 1,
+  },
+  {
+    id: "to_limit_of_second_num",
+    name: "toLimitOfSecondNum",
+    type: "number",
+    label: "Ending limit of second number",
+    hint: "Used to configure the ending range of numbers",
+    defaultValue: 10,
+  },
+];
